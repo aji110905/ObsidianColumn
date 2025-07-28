@@ -5,7 +5,7 @@ from obsidian_column.command.clean_command import CleanCommand
 from obsidian_column.command.set_command import SetCommand
 from obsidian_column.command.sub_command import SubCommand
 
-class Command(SubCommand):
+class OcCommand(SubCommand):
     all_FakePlayerGroups: List[FakePlayerGroup] = []
     def get_command_node(self) -> Literal:
         main_main_sub_command = (
