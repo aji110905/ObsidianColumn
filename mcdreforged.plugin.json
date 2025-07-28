@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "name": "Obsidian Column",
   "description": {
-    "zh_cn": "快速召唤假玩家去挖掘黑曜石柱"
+    "zh_cn": "可以帮助你召唤大量假人挖掘黑曜石柱"
   },
   "link": "https://github.com/aji110905/BatchFakePlayer",
   "author":[
