@@ -1,5 +1,6 @@
 # ObsidianColumn
 一个[MCDR](https://github.com/MCDReforged/MCDReforged)插件
+
 依赖模组[Carpet](https://modrinth.com/mod/carpet)
 
 ## 功能
