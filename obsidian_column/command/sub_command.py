@@ -2,12 +2,12 @@ import re
 from abc import ABC, abstractmethod
 from typing import List
 from mcdreforged.api.all import *
-from obsidian_column.config import Config
+from obsidian_column.config import Config, reload_config
+
 
 class SubCommand(ABC):
-    def __init__(self,server : PluginServerInterface, config : Config):
+    def __init__(self,server : PluginServerInterface):
         self.server = server
-        self.config = config
 
     @abstractmethod
     def get_command_node(self) -> Literal:
@@ -20,10 +20,10 @@ class SubCommand(ABC):
         else:
             return True
 
-    def save_config(self, config: Config, type: str, server: PluginServerInterface, new_value, ) -> Config:
+    def save_config(self, config: Config, type: str, server: PluginServerInterface, new_value, ):
         setattr(config, type, new_value)
         server.save_config_simple(config)
-        return config
+        reload_config()
 
     def get_help_message(self, source: CommandSource, translation_key: str) -> List[RTextBase]:
         list = []

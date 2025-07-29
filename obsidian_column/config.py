@@ -14,10 +14,25 @@ class Config(Serializable):
     suffix : str = ""
     permissions : PermissionConfig = PermissionConfig()
 
-def load_config(server : PluginServerInterface, prev_module) -> Config:
+config : Config
+server : PluginServerInterface
+
+def load_config(server_ : PluginServerInterface, prev_module) -> Config:
+    global config, server
     if prev_module is None:
+        server = server_
         config = Config()
         server.save_config_simple(config)
         return config
     else:
-        return server.load_config_simple(target_class = Config())
+        server = server_
+        config = server.load_config_simple(target_class = Config())
+        return config
+
+def get_config() -> Config:
+    global config
+    return config
+
+def reload_config():
+    global config, server
+    config = server.load_config_simple(target_class=Config())
