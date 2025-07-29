@@ -4,9 +4,9 @@ class PermissionConfig(Serializable):
     oc : int = 1
     spawn : int = 1
     reload : int = 1
+    group: int = 1
     set : int = 2
     clean : int = 2
-    list : int = 1
 
 class Config(Serializable):
     interval : int = 5
