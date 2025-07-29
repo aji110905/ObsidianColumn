@@ -4,7 +4,10 @@ obsidian_column:
       .: |
         §7!!oc§r: 显示这条消息
         §7!!oc set§r: 显示设置相关的帮助信息
+        §7!!oc clean§r: 显示清除相关的帮助信息
+        §7!!oc group§r: 显示假人组相关的帮助信息
         §7!!oc reload§r: 重载插件
+        §7!!oc config§r: 显示当前配置信息
         §7!!oc spawn §6<x> <y> <z> <半径> §r: 显示设置相关的帮助信息
       set: |
         §7!!oc set§r: 显示这条消息
@@ -15,21 +18,26 @@ obsidian_column:
         §7!!oc clean§r: 显示这条消息
         §7!!oc clean prefix§r: 清除假人前缀
         §7!!oc clean suffix§r: 清除假人后缀
+      group: |
+        §7!!oc group§r: 显示这条消息
       title: §l----------obsidian column----------
       help_message: 显示OC帮助菜单
-    command:
-      set:
-        interval:
-          negative_number_error: §c召唤间隔不能为负数
-          success: §a成功把召唤间隔设置为{0}秒
-        prefix:
-          success: §a成功把假人前缀设置为{0}
-        suffix:
-          success: §a成功把假人后缀设置为{0}
-      clean:
-        prefix:
-          success: §a成功清空假人前缀
-        suffix:
-          success: §a成功清空假人后缀
-      reload:
-        success: §a重载插件成功
+    config: |
+      §7召唤间隔为§6{0}
+      §7假人前缀为§6{1}
+      §7假人后缀为§6{2}
+    set:
+      interval:
+        negative_number_error: §c召唤间隔不能为负数
+        success: §a成功把召唤间隔设置为§6{0}
+      prefix:
+        success: §a成功把假人前缀设置为§6{0}
+      suffix:
+        success: §a成功把假人后缀设置为§6{0}
+    clean:
+      prefix:
+        success: §a成功清空假人前缀
+      suffix:
+        success: §a成功清空假人后缀
+    reload:
+      success: §a重载插件成功

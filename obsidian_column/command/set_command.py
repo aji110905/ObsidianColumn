@@ -6,8 +6,8 @@ class SetCommand(SubCommand):
         return (
             Literal({"set", "s"}).runs(self.show_help_message).
             then(Literal({"interval", "i"}).then(Integer("number").runs(self.set_interval))).
-            then(Literal({"prefix", "pre"}).then(Integer("number").runs(self.set_prefix))).
-            then(Literal({"suffix", "suf"}).then(Integer("number").runs(self.set_suffix)))
+            then(Literal({"prefix", "pre"}).then(Text("string").runs(self.set_prefix))).
+            then(Literal({"suffix", "suf"}).then(Text("string").runs(self.set_suffix)))
         )
 
     def show_help_message(self, source : CommandSource, context: CommandContext):
@@ -23,16 +23,16 @@ class SetCommand(SubCommand):
             source.reply(source.get_server().rtr("obsidian_column.plugin_command.interval.negative_number_error"))
             return
         self.config = self.save_config(self.config, "interval", self.server, context["number"])
-        source.reply(source.get_server().rtr("obsidian_column.command.set.interval.success", self.config.interval))
+        source.reply(source.get_server().rtr("obsidian_column.plugin_command.set.interval.success", self.config.interval))
 
     def set_prefix(self, source: CommandSource, context: CommandContext):
         if not self.determine_permissions(source, self.config.permissions.set):
             return
         self.config = self.save_config(self.config, "prefix", self.server, context["string"])
-        source.reply(source.get_server().rtr("obsidian_column.command.set.prefix.success", self.config.prefix))
+        source.reply(source.get_server().rtr("obsidian_column.plugin_command.set.prefix.success", self.config.prefix))
 
     def set_suffix(self, source: CommandSource, context: CommandContext):
         if not self.determine_permissions(source, self.config.permissions.set):
             return
         self.config = self.save_config(self.config, "suffix", self.server, context["string"])
-        source.reply(source.get_server().rtr("obsidian_column.command.set.suffix.success", self.config.suffix))
+        source.reply(source.get_server().rtr("obsidian_column.plugin_command.set.suffix.success", self.config.suffix))

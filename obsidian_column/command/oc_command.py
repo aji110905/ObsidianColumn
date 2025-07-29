@@ -2,6 +2,7 @@ from typing import List
 from mcdreforged.api.all import *
 from obsidian_column.FakePlayerGroup import FakePlayerGroup
 from obsidian_column.command.clean_command import CleanCommand
+from obsidian_column.command.group_command import GroupCommand
 from obsidian_column.command.set_command import SetCommand
 from obsidian_column.command.sub_command import SubCommand
 
@@ -11,10 +12,12 @@ class OcCommand(SubCommand):
         main_main_sub_command = (
             Literal("!!oc").runs(self.show_help_message).
             then(Literal({"reload", "r"}).runs(self.reload_plugin)).
+            then(Literal({"config", "con"}).runs(self.show_now_config)).
             then(Literal("spawn").then(Integer("x").then(Integer("y").then(Integer("z").then(Integer("radius").runs(self.spawn_fake_player_attack))))))
         )
         main_main_sub_command.then(SetCommand(self.server, self.config).get_command_node())
         main_main_sub_command.then(CleanCommand(self.server, self.config).get_command_node())
+        main_main_sub_command.then(GroupCommand(self.server, self.config).get_command_node())
         return main_main_sub_command
 
     # 显示帮助信息
@@ -30,6 +33,14 @@ class OcCommand(SubCommand):
             return
         source.get_server().reload_plugin("obsidian_column")
         source.reply(source.get_server().rtr("obsidian_column.plugin_command.reload.success"))
+
+    def show_now_config(self, source : CommandSource, context: CommandContext):
+        source.reply(source.get_server().rtr(
+            "obsidian_column.plugin_command.config",
+            self.config.interval,
+            self.config.prefix,
+            self.config.suffix)
+        )
 
     # 批量召唤假人挖掘黑曜石柱
     @new_thread("spawn") # 创建新的线程 避免看门狗报错

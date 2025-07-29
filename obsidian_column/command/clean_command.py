@@ -19,10 +19,10 @@ class CleanCommand(SubCommand):
         if not self.determine_permissions(source, self.config.permissions.clean):
             return
         self.config = self.save_config(self.config, "prefix", self.server, "")
-        source.reply(source.get_server().rtr("obsidian_column.plugin_command.command.clean.prefix"))
+        source.reply(source.get_server().rtr("obsidian_column.plugin_command.clean.prefix.success"))
 
     def clean_suffix(self,source: CommandSource, context: CommandContext):
         if not self.determine_permissions(source, self.config.permissions.clean):
             return
         self.config = self.save_config(self.config, "suffix", self.server, "")
-        source.reply(source.get_server().rtr("obsidian_column.plugin_command.command.clean.suffix"))
+        source.reply(source.get_server().rtr("obsidian_column.plugin_command.clean.suffix.success"))
