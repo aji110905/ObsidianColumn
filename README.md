@@ -2,7 +2,7 @@
 
 ## 简介
 
-Obsidian Column 是一款基于 [MCDReforged](https://github.com/MCDReforged/MCDReforged) 的插件，能够帮助你在 Minecraft 中召唤大量假人自动挖掘末地黑曜石柱
+Obsidian Column 是 [MCDReforged](https://github.com/MCDReforged/MCDReforged) 的插件，能够帮助你在 Minecraft 中召唤大量假人自动挖掘末地黑曜石柱
 
 ## 依赖
 
