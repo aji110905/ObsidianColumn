@@ -20,6 +20,9 @@ obsidian_column:
         §7!!oc clean suffix§r: 清除假人后缀
       group: |
         §7!!oc group§r: 显示这条消息
+        §7!!oc group list§r: 显示所有假人组
+        §7!!oc group kill §6<group_name>§r: 清除假人组
+        §7!!oc group attack §6<group_name>§r: 让假人组全部重新挖掘
       title: §l----------obsidian column----------
       help_message: 显示OC帮助菜单
     config: |
@@ -41,3 +44,18 @@ obsidian_column:
         success: §a成功清空假人后缀
     reload:
       success: §a重载插件成功
+    group:
+      list:
+        none: §e你还没有召唤假人组
+        show:
+          kill: 点击清除此假人组
+          attack: 点击让所有假人重新开始挖掘
+      kill:
+        success: §a成功清除假人组{0}
+        fail: §c清除失败 未知的假人组
+      attack:
+        success: §a假人组{0}已重新挖掘
+        fail: §c重新挖掘失败 未知的假人组
+    spawn:
+      success: §a召唤成功
+      fail: §c未知的半径

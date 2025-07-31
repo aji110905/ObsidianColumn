@@ -5,22 +5,22 @@ from obsidian_column.command.clean_command import CleanCommand
 from obsidian_column.command.group_command import GroupCommand
 from obsidian_column.command.set_command import SetCommand
 from obsidian_column.command.sub_command import SubCommand
-from obsidian_column.config import get_config
+from obsidian_column.config import get_config, reload_config
 
+All_FakePlayerGroups: List[FakePlayerGroup] = []
 
 class OcCommand(SubCommand):
-    all_FakePlayerGroups: List[FakePlayerGroup] = []
     def get_command_node(self) -> Literal:
-        main_main_sub_command = (
+        main_sub_command = (
             Literal("!!oc").runs(self.show_help_message).
             then(Literal({"reload", "r"}).runs(self.reload_plugin)).
             then(Literal({"config", "con"}).runs(self.show_now_config)).
             then(Literal("spawn").then(Integer("x").then(Integer("y").then(Integer("z").then(Integer("radius").runs(self.spawn_fake_player_attack))))))
         )
-        main_main_sub_command.then(SetCommand(self.server).get_command_node())
-        main_main_sub_command.then(CleanCommand(self.server).get_command_node())
-        main_main_sub_command.then(GroupCommand(self.server).get_command_node())
-        return main_main_sub_command
+        main_sub_command.then(SetCommand(self.server).get_command_node())
+        main_sub_command.then(CleanCommand(self.server).get_command_node())
+        main_sub_command.then(GroupCommand(self.server).get_command_node())
+        return main_sub_command
 
     # 显示帮助信息
     def show_help_message(self, source : CommandSource, context: CommandContext):
@@ -50,7 +50,5 @@ class OcCommand(SubCommand):
         # 判断权限是否足够
         if not self.determine_permissions(source, get_config().permissions.spawn):
             return
-        self.all_FakePlayerGroups.append(FakePlayerGroup(context["x"], context["y"], context["z"], context["radius"], source, get_config()))
+        All_FakePlayerGroups.append(FakePlayerGroup(context["x"], context["y"], context["z"], context["radius"], source, get_config()))
 
-    def get_all_FakePlayerGroups(self) -> List[FakePlayerGroup]:
-        return self.all_FakePlayerGroups

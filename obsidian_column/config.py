@@ -1,3 +1,5 @@
+from typing import List
+
 from mcdreforged.api.all import *
 
 class PermissionConfig(Serializable):

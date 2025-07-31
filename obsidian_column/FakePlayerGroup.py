@@ -1,3 +1,5 @@
+from typing import List
+
 from mcdreforged.command.command_source import CommandSource
 from obsidian_column.config import Config
 import time
@@ -5,10 +7,10 @@ import time
 # 假人组 挖同一个黑曜石柱子的所有假人为一个假人组
 class FakePlayerGroup:
     name : str
-    all_fake_player_name = []
+    all_fake_player_name : List[str] = []
     def __init__(self, x: int, y: int, z: int, radius: int, source : CommandSource, config: Config):
         self.spawn_fake_player(x, y, z, radius, source, config)
-        self.name = f"{x}_{z} {radius}"
+        self.name = f"{x}_{z}_{radius}"
 
     # 召唤假人
     def spawn_fake_player(self, x : int, y : int, z : int, radius : int, source : CommandSource, config : Config):
@@ -129,8 +131,8 @@ class FakePlayerGroup:
                 z -= 1
 
             # 提示操作成功
-            source.reply(source.get_server().rtr("obsidian_column.command.operation_successful"))
+            source.reply(source.get_server().rtr("obsidian_column.plugin_command.spawn.success"))
         else:
             # 半径不对
-            source.reply(source.get_server().rtr("obsidian_column.command.parameter_error"))
+            source.reply(source.get_server().rtr("obsidian_column.plugin_command.spawn.fail"))
             return
